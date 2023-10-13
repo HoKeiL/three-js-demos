@@ -27,25 +27,15 @@ export async function setupThreeJSScene(): Promise<void> {
     setupHelpers(scene);
 
     //Load a model of a submarine and add it to the scene!
-    const submarine = await loadModel("./assets/lionSubmariners.glb");
-    if (submarine) {
-        submarine.scale.set(5, 5, 5);
-        submarine.position.setZ(50);
-        scene.add(submarine);
+    const twister = await loadModel("./assets/twister.glb");
+    if (twister) {
+        twister.scale.set(50, 50, 50);
+        twister.position.setZ(50);
+        scene.add(twister);
 
         //Optional: See in console what the model / scene consists of
-        dumpObjectToConsoleAsString(submarine)
+        dumpObjectToConsoleAsString(twister)
 
-        //Optional: find a subpart of the model and store it in userData (or some other variable)
-        // (for later animation)
-        submarine.traverse(child => {
-            if (child.name === "sub_prop") {
-                submarine.userData.propeller = child;
-            }
-            if (child.name === "sub_periscope") {
-                submarine.userData.periscope = child;
-            }
-        });
     }
 
     //You can get more models from https://market.pmnd.rs/
@@ -58,9 +48,9 @@ export async function setupThreeJSScene(): Promise<void> {
     function animate() {
         renderer.render(scene, camera);
 
-        if (submarine) {
-            animateSubmarine(submarine);
-            moveCameraAlongsideSubmarine(submarine);
+        if (twister) {
+            animateSubmarine(twister);
+            moveCameraAlongsideSubmarine(twister);
             //either /  or move the camera automatically or allow the user to control it        
             false && controls.update(); // required if controls has .enableDamping .autoRotate set true.
         }
@@ -68,28 +58,18 @@ export async function setupThreeJSScene(): Promise<void> {
 
 
         const infoElem = document.getElementById("info");
-        if (infoElem && submarine) {
-            infoElem.innerText = "z: " + Math.round(submarine.position.z);
+        if (infoElem && twister) {
+            infoElem.innerText = "z: " + Math.round(twister.position.z);
         }
         requestAnimationFrame(animate);
         frameCount++;
     }
 
-    function animateSubmarine(submarine: Object3D) {
+    function animateSubmarine(twister: Object3D) {
         //moving forward
-        submarine.position.setZ(submarine.position.z -= 0.1)
+        twister.position.setZ(twister.position.z -= 0.1)
         //bobbing up and down with a sine wave
-        submarine.position.setY(Math.sin(frameCount / 20));
-        if (submarine.userData.propeller) {
-            submarine.userData.propeller.rotation.y += 0.1;
-        }
-        if (submarine.userData.periscope) {
-            //correct
-            submarine.userData.periscope.rotation.z = Math.sin(frameCount / 40);
-            //but funnier
-            // submarine.userData.periscope.rotation.y = Math.sin(frameCount / 10);
-        }
-
+        twister.position.setY(Math.sin(frameCount / 20));
     }
     //unimportant
     function moveCameraAlongsideSubmarine(submarine: Object3D) {
