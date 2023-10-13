@@ -1,0 +1,65 @@
+import { Clock, Mesh, PlaneGeometry, Scene, ShaderMaterial } from 'three';
+import { setupCamera } from './setupCamera';
+import { setupCustomShaderMaterial } from './setupCustomShaderMaterial';
+import { setupHelpers } from './setupHelpers';
+import { setupLights } from './setupLights';
+import { setupOrbitControls } from './setupOrbitControls';
+import { setupRenderer } from './setupRenderer';
+
+export function setupThreeJSScene(): void {
+
+    const scene = new Scene();
+
+    const dimensions = { w: window.innerWidth, h: window.innerHeight };
+
+    const camera = setupCamera(dimensions);
+
+    const renderer = setupRenderer(camera, dimensions);
+
+    const controls = setupOrbitControls(camera, renderer.domElement);
+
+    setupLights(scene);
+
+    setupHelpers(scene);
+
+    const planeGeometry1 = new PlaneGeometry(30, 30, 30);
+
+    const layerMeshes: Mesh[] = [];
+    const origMaterial = setupCustomShaderMaterial();
+    for (let layerIx = 0; layerIx < 8; layerIx++) {
+        const material = origMaterial.clone(); //need a separate one so we can supply different uniform values
+        const layerMesh: Mesh = new Mesh(planeGeometry1, material);
+        layerMesh.userData.timeOffset = layerIx * 0.25;
+        layerMesh.position.z = 1 * layerIx;
+        scene.add(layerMesh);
+        layerMeshes.push(layerMesh)
+    }
+
+    const clock = new Clock();
+
+    animate();
+
+
+
+
+    function animate() {
+
+        for (const layerMesh of layerMeshes) {
+            layerMesh.rotation.z += 0.002;
+            (layerMesh.material as ShaderMaterial).uniforms.u_time.value = layerMesh.userData.timeOffset + clock.getElapsedTime();
+        }
+
+        //Draw the current scene to the canvas - one frame of animation.
+        renderer.render(scene, camera);
+
+        // required if controls.enableDamping or controls.autoRotate are set to true
+        controls.update();
+
+        //Queue for this function to be called again when the browser is ready for another animation frame.
+        requestAnimationFrame(animate);
+    }
+
+
+}
+
+setupThreeJSScene();
