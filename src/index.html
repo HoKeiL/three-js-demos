@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Scroll interactive background - ThreeJS + TypeScript + Parcel:
+      Scroll-interactive page background
+    </title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Neuton&family=Roboto:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" src="./index.ts"></script>
+  </head>
+  <body>
+    <div id="info-block">
+      <div id="floating-info">blah</div>
+      <div id="info">Three.js - scroll-interactive page background demo</div>
+
+      <div class="extra extra1">
+        <div>
+          The canvas is given a z-index less than the other html elements of the
+          page (such as this text) so that it appears behind them.
+        </div>
+        <div>
+          The canvas given fixed positioning so that when the user scrolls, the
+          canvas stays in one place.
+        </div>
+        <div>
+          On the body, I set overscroll-behavior-y to none so that there's no
+          bounce at the end of scroll. This may not be supported well across all
+          browsers, yet.
+        </div>
+        <div id="about-floating-info">
+          Another div is given floating positioning - this "floating-info"
+          element is used for debug text. It has its innerText set by our scroll
+          handler to animation variables we're using in our three.js scene.
+          Better than console.logging, sometimes.
+        </div>
+      </div>
+
+      <div class="extra extra2">
+        <div>An event handler (function) is set on document.body.onscroll.</div>
+        <div>This function is called whenever a scroll event happens.</div>
+        <div>
+          The function looks at the relative position of the top of the body
+          element, let's call it t. (t starts at zero, goes increasingly
+          negative as we scroll)
+        </div>
+        <div>
+          This value, t, is used to compute various properties of the objects in
+          the scene - the rotations of the spinning cube, and its position on
+          the x axis.
+        </div>
+        <div>
+          Actually, that's a lie - in most cases, t is not directly used.
+          Instead of setting the property directly from t, we set a
+          <em>desired</em>
+          value for the property and then, each frame, animate (lerp) the
+          property some fraction of the way towards its desired value.
+        </div>
+        <div>
+          This ensures that the animation happens smoothly and doesn't jerk to a
+          halt just because scroll events suddenly cease.
+        </div>
+      </div>
+      <div class="extra extra1">
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam quasi
+          amet dignissimos autem et nemo pariatur. Temporibus, deleniti sit
+          suscipit, neque incidunt porro molestiae odit ut reiciendis sapiente
+          impedit cupiditate?
+        </div>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam quasi
+          amet dignissimos autem et nemo pariatur. Temporibus, deleniti sit
+          suscipit, neque incidunt porro molestiae odit ut reiciendis sapiente
+          impedit cupiditate?
+        </div>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam quasi
+          amet dignissimos autem et nemo pariatur. Temporibus, deleniti sit
+          suscipit, neque incidunt porro molestiae odit ut reiciendis sapiente
+          impedit cupiditate?
+        </div>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam quasi
+          amet dignissimos autem et nemo pariatur. Temporibus, deleniti sit
+          suscipit, neque incidunt porro molestiae odit ut reiciendis sapiente
+          impedit cupiditate?
+        </div>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam quasi
+          amet dignissimos autem et nemo pariatur. Temporibus, deleniti sit
+          suscipit, neque incidunt porro molestiae odit ut reiciendis sapiente
+          impedit cupiditate?
+        </div>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam quasi
+          amet dignissimos autem et nemo pariatur. Temporibus, deleniti sit
+          suscipit, neque incidunt porro molestiae odit ut reiciendis sapiente
+          impedit cupiditate?
+        </div>
+      </div>
+      <div class="extra extra2">
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam quasi
+          amet dignissimos autem et nemo pariatur. Temporibus, deleniti sit
+          suscipit, neque incidunt porro molestiae odit ut reiciendis sapiente
+          impedit cupiditate?
+        </div>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam quasi
+          amet dignissimos autem et nemo pariatur. Temporibus, deleniti sit
+          suscipit, neque incidunt porro molestiae odit ut reiciendis sapiente
+          impedit cupiditate?
+        </div>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam quasi
+          amet dignissimos autem et nemo pariatur. Temporibus, deleniti sit
+          suscipit, neque incidunt porro molestiae odit ut reiciendis sapiente
+          impedit cupiditate?
+        </div>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam quasi
+          amet dignissimos autem et nemo pariatur. Temporibus, deleniti sit
+          suscipit, neque incidunt porro molestiae odit ut reiciendis sapiente
+          impedit cupiditate?
+        </div>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam quasi
+          amet dignissimos autem et nemo pariatur. Temporibus, deleniti sit
+          suscipit, neque incidunt porro molestiae odit ut reiciendis sapiente
+          impedit cupiditate?
+        </div>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam quasi
+          amet dignissimos autem et nemo pariatur. Temporibus, deleniti sit
+          suscipit, neque incidunt porro molestiae odit ut reiciendis sapiente
+          impedit cupiditate?
+        </div>
+      </div>
+      <div class="footer">
+        licensed under the
+        <a href="https://creativecommons.org/licenses/by/3.0/"
+          >CC BY 3.0 Attribution 3.0 Unported License</a
+        >.
+      </div>
+    </div>
+  </body>
+</html>
