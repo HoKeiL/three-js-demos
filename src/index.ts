@@ -27,9 +27,9 @@ export async function setupThreeJSScene(): Promise<void> {
     setupHelpers(scene);
 
     //Load a model of a submarine and add it to the scene!
-    const twister = await loadModel("./assets/twister.glb");
+    const twister = await loadModel("./assets/ufoWithMaterials.glb");
     if (twister) {
-        twister.scale.set(50, 50, 50);
+        twister.scale.set(5, 5, 5);
         twister.position.setZ(50);
         scene.add(twister);
 
