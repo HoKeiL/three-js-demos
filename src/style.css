@@ -1,0 +1,95 @@
+:root {
+  /* variables we can use throughout the css */
+  --hudTextColour: rgb(42, 117, 87);
+}
+
+html {
+  box-sizing: border-box;
+  font-family: 'Neuton', serif;
+  /* font-family: 'Roboto', sans-serif; */
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #222;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
+  user-select: none;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+#info-block {
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  font-size: 1rem;
+  color: white;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+#info {
+  grid-column: 3/11;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.extra div {
+  margin: 2rem;
+}
+
+.extra {
+  margin-bottom: 100px;
+  font-size: 1.5rem;
+  text-align: justify;
+}
+
+.extra1 {
+  margin-top: 300px;
+  grid-column: 2/6;
+}
+
+.extra2 {
+  margin-top: 300px;
+  grid-column: 5/11;
+}
+
+.footer {
+  margin-top: 300px;
+  grid-column: 2/10;
+}
+
+#floating-info {
+  color: var(--hudTextColour);
+  position: fixed;
+  width: 400px;
+  bottom: 50px;
+  right: 100px;
+  font-size: 2rem;
+  /* background: pink; */
+}
+
+.hilit {
+  outline: 8px solid var(--hudTextColour);
+  outline-offset: 5px;
+  border-radius: 5px;
+}
